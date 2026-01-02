@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Request Quote | Operon</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --primary:#1e40af;
+  --accent:#38bdf8;
+  --bg:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --card:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.navbar{
+  padding:18px 60px;
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+
+.logo{font-weight:700;color:var(--primary)}
+
+.navbar a{
+  margin-left:24px;
+  text-decoration:none;
+  color:var(--muted);
+}
+
+/* ===== FORM ===== */
+.container{
+  max-width:1100px;
+  margin:60px auto;
+  padding:0 40px;
+}
+
+.quote-box{
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  overflow:hidden;
+}
+
+/* LEFT INFO */
+.quote-info{
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:#fff;
+  padding:50px;
+}
+
+.quote-info h2{margin-top:0}
+.quote-info p{color:#cbd5e1;font-size:15px}
+
+.steps{
+  margin-top:30px;
+}
+
+.steps div{
+  margin-bottom:16px;
+  font-size:14px;
+}
+
+/* RIGHT FORM */
+.quote-form{
+  padding:50px;
+}
+
+.section-title{
+  font-size:14px;
+  font-weight:700;
+  margin:24px 0 10px;
+  color:#334155;
+  text-transform:uppercase;
+}
+
+input,textarea{
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:12px;
+  border:1px solid #cbd5e1;
+  font-size:14px;
+}
+
+textarea{min-height:90px;resize:vertical}
+
+.btn{
+  width:100%;
+  padding:16px;
+  background:var(--accent);
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.note{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:14px;
+  text-align:center;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .quote-box{grid-template-columns:1fr}
+  .quote-info{padding:40px}
+  .quote-form{padding:40px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="index.html"><div class="logo">OPERON</div></a>
+  <nav>
+    <a href="category.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="qoute.html">Account</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="quote-box">
+
+    <!-- LEFT PANEL -->
+    <div class="quote-info">
+      <h2>Request a Quote</h2>
+      <p>
+        Share your requirements and our team will get back with
+        pricing, availability, and installation details.
+      </p>
+
+      <div class="steps">
+        <div>✔ Dedicated sales & technical consultation</div>
+        <div>✔ Installation & service support guidance</div>
+        <div>✔ GST-compliant quotation</div>
+        <div>✔ Response within 24–48 working hours</div>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <form class="quote-form">
+      <div class="section-title">Lab / Organization Details</div>
+      <input placeholder="Lab / Company Name *" required>
+      <input placeholder="Contact Person Name *" required>
+      <input placeholder="Phone Number *" required>
+      <input placeholder="Email Address">
+
+      <div class="section-title">Address & Compliance</div>
+      <textarea placeholder="Complete Address *" required></textarea>
+      <input placeholder="GST Number (Optional)">
+      <input placeholder="Purchase Order Reference (Optional)">
+
+      <div class="section-title">Requirements</div>
+      <textarea placeholder="Product interested in / quantity / remarks"></textarea>
+
+      <button class="btn">Submit Request</button>
+      <div class="note">
+        Your information is kept confidential and used only for quotation purposes.
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analyzer Z1 | Operon</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --primary:#1e40af;
+  --accent:#38bdf8;
+  --bg:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --card:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.navbar{
+  padding:18px 60px;
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+
+.logo{font-weight:700;color:var(--primary);letter-spacing:1px}
+
+.navbar a{
+  margin-left:24px;
+  text-decoration:none;
+  color:var(--muted);
+}
+
+.container{
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 40px;
+}
+
+/* ===== PRODUCT HERO ===== */
+.product-hero{
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  gap:60px;
+  align-items:center;
+}
+
+.product-hero img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 30px 60px rgba(0,0,0,.2);
+}
+
+.badge{
+  display:inline-block;
+  background:#e0f2fe;
+  color:#0369a1;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.price{
+  font-size:28px;
+  font-weight:700;
+  margin:14px 0;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 30px;
+  background:var(--accent);
+  color:#020617;
+  border-radius:999px;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+.service-note{
+  margin-top:16px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.pincode-box{
+  margin-top:20px;
+}
+
+.pincode-box input{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #cbd5e1;
+  width:160px;
+  margin-right:10px;
+}
+
+.btn.small{
+  padding:10px 18px;
+  font-size:14px;
+}
+
+.pincode-result{
+  margin-top:10px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.available{color:green}
+.limited{color:#ca8a04}
+.invalid{color:#dc2626}
+
+/* ===== FEATURES ===== */
+.features{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.features div{
+  background:#fff;
+  padding:16px 18px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  font-size:14px;
+}
+
+/* ===== TABS ===== */
+.tabs{
+  margin-top:80px;
+}
+
+.tab-buttons-wrapper{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.tab-buttons-wrapper::-webkit-scrollbar{
+  display:none;
+}
+
+.tab-buttons{
+  display:flex;
+  gap:16px;
+  min-width:min-content;
+}
+
+.tab-buttons button{
+  background:none;
+  border:none;
+  padding:14px 6px;
+  font-size:15px;
+  font-weight:600;
+  color:var(--muted);
+  cursor:pointer;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.tab-panel{
+  display:none;
+}
+
+.tab-panel.active{
+  display:block;
+}
+
+.tab-buttons button.active{
+  color:var(--primary);
+  border-bottom:3px solid var(--primary);
+}
+
+.tab-content{
+  margin-top:30px;
+  background:#fff;
+  padding:40px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  line-height:1.7;
+}
+
+/* ===== REVIEWS ===== */
+.review-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-card {
+  background: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.review-date {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.star-rating {
+  color: #fbbf24;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.review-text {
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.verified-badge {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .navbar{
+    padding:18px 30px;
+  }
+
+  .navbar a{
+    margin-left:16px;
+    font-size:14px;
+  }
+
+  .container{
+    padding:0 20px;
+    margin:30px auto;
+  }
+
+  .product-hero{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .pincode-box{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .pincode-box input{
+    width:100%;
+    margin-right:0;
+  }
+
+  .btn.small{
+    width:100%;
+  }
+
+  .tab-content{
+    padding:24px 20px;
+  }
+
+  .tab-buttons button{
+    font-size:14px;
+    padding:12px 8px;
+  }
+
+  .review-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .verified-badge{
+    margin-left:0;
+    margin-top:4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="index.html"><div class="logo">OPERON</div></a>
+  <nav>
+    <a href="category.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="qoute.html">Account</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- PRODUCT HERO -->
+  <section class="product-hero">
+    <img src="https://picsum.photos/seed/analyzer/600/500" alt="Analyzer Z1">
+
+    <div>
+      <span class="badge">Semi-Automatic Analyzer</span>
+      <h1>Analyzer Z1</h1>
+      <p>Semi-automatic coagulation analyzer designed for reliable and consistent performance in small to mid-size laboratories.</p>
+
+      <div class="price">₹59,000</div>
+      <button class="btn">Add to Cart</button>
+
+      <div class="service-note">
+        ✔ In-person installation available<br>
+        ✔ Online technical support for unserved PIN codes
+      </div>
+
+      <div class="pincode-box">
+        <input type="text" id="pincodeInput" placeholder="Enter PIN code" maxlength="6">
+        <button class="btn small" onclick="checkPincode()">Check Availability</button>
+        <div id="pincodeResult" class="pincode-result"></div>
+      </div>
+
+      <div class="features">
+        <div>✔ Throughput: Up to 60 tests/hour</div>
+        <div>✔ Sample Type: Plasma</div>
+        <div>✔ Parameters: PT, APTT, TT</div>
+        <div>✔ Ideal for Diagnostic Labs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <section class="tabs">
+    <div class="tab-buttons-wrapper">
+      <div class="tab-buttons">
+        <button class="active" data-tab="0">Overview</button>
+        <button data-tab="1">Specifications</button>
+        <button data-tab="2">Brochure</button>
+        <button data-tab="3">Warranty</button>
+        <button data-tab="4">Reviews</button>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tabContent">
+      <div class="tab-panel active">
+        <h3>Product Overview</h3>
+        <p>Analyzer Z1 is engineered to deliver accurate coagulation testing with minimal operator intervention.</p>
+      </div>
+
+      <div class="tab-panel">
+        <h3>Specifications</h3>
+        <ul>
+          <li>Throughput: Up to 60 tests/hour</li>
+          <li>Sample Type: Plasma</li>
+          <li>Parameters: PT, APTT, TT</li>
+          <li>Display: LCD</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel">
+        <h3>Brochure</h3>
+        <p><a href="#" target="_blank">Download Product Brochure (PDF)</a></p>
+      </div>
+
+      <div class="tab-panel">
+        <h3>Warranty</h3>
+        <p>1-year standard warranty covering manufacturing defects.</p>
+        <p>Extended warranty options available.</p>
+      </div>
+
+      <div class="tab-panel">
+        <h3>Customer Reviews</h3>
+        <div class="review-container">
+          
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <span class="reviewer-name">Dr. Rajesh Kumar</span>
+                <span class="verified-badge">✓ Verified Purchase</span>
+              </div>
+              <span class="review-date">Dec 15, 2024</span>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="review-text">
+              Excellent analyzer for our diagnostic lab. Installation was smooth and the technical team was very professional. Been using it for 3 months now with zero issues.
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <span class="reviewer-name">Priya Sharma</span>
+                <span class="verified-badge">✓ Verified Purchase</span>
+              </div>
+              <span class="review-date">Nov 28, 2024</span>
+            </div>
+            <div class="star-rating">★★★★☆</div>
+            <p class="review-text">
+              Good product overall. Results are accurate and consistent. The only minor issue is the LCD could be brighter. Otherwise, highly satisfied with the purchase.
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <span class="reviewer-name">Pathology Center Mumbai</span>
+                <span class="verified-badge">✓ Verified Purchase</span>
+              </div>
+              <span class="review-date">Oct 10, 2024</span>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="review-text">
+              Best value for money in this price range. We process around 40-50 samples daily and this analyzer handles it perfectly. Maintenance is also minimal.
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <span class="reviewer-name">Amit Patel</span>
+                <span class="verified-badge">✓ Verified Purchase</span>
+              </div>
+              <span class="review-date">Sep 22, 2024</span>
+            </div>
+            <div class="star-rating">★★★★★</div>
+            <p class="review-text">
+              Operon delivered on time and installation was completed in just 2 hours. The training provided was comprehensive. Great customer support team!
+            </p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <span class="reviewer-name">Dr. Meena Reddy</span>
+                <span class="verified-badge">✓ Verified Purchase</span>
+              </div>
+              <span class="review-date">Aug 5, 2024</span>
+            </div>
+            <div class="star-rating">★★★★☆</div>
+            <p class="review-text">
+              Reliable analyzer with good accuracy. Takes a bit of time to get used to the interface but once you do, it's smooth sailing. Would recommend for small labs.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+function checkPincode(){
+  const pin = document.getElementById("pincodeInput").value;
+  const result = document.getElementById("pincodeResult");
+
+  if(pin.length !== 6 || isNaN(pin)){
+    result.textContent = "Please enter a valid 6-digit PIN code.";
+    result.className = "pincode-result invalid";
+    return;
+  }
+
+  // Mock serviceable PIN codes
+  const serviceablePins = ["560001","560034","110001","400001"];
+
+  if(serviceablePins.includes(pin)){
+    result.textContent = "✔ Service & Installation available at your location.";
+    result.className = "pincode-result available";
+  } else {
+    result.textContent = "⚠ Installation unavailable. Online technical support provided.";
+    result.className = "pincode-result limited";
+  }
+}
+</script>
+
+<script>
+const tabButtons = document.querySelectorAll(".tab-buttons button");
+const tabPanels = document.querySelectorAll(".tab-panel");
+
+tabButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    tabButtons.forEach(b => b.classList.remove("active"));
+    tabPanels.forEach(p => p.classList.remove("active"));
+
+    btn.classList.add("active");
+    tabPanels[btn.dataset.tab].classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>

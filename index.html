@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operon - Advanced Diagnostic Solutions</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --accent: #38bdf8;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .navbar a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(2,6,23,0.85) 0%, rgba(2,6,23,0.55) 50%, rgba(2,6,23,0.2) 100%);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: relative;
+      max-width: 520px;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 24px;
+      opacity: 0.95;
+    }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 3;
+    }
+
+    .hero-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .hero-dots span.active {
+      background: #38bdf8;
+      transform: scale(1.2);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #020617;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.small {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
+    .trust {
+      margin: 60px auto;
+      max-width: 1100px;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .trust div {
+      background: var(--card);
+      padding: 28px 24px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .categories {
+      padding: 80px 60px;
+    }
+
+    .categories h2, .testimonials h2, .offers h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .category-grid {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .category-card {
+      background: var(--card);
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 18px;
+      font-weight: 600;
+      box-shadow: 0 12px 35px rgba(0,0,0,.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .category-card:hover {
+      color: white;
+      background-color: #0f172a;
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.15);
+    }
+
+    .testimonials {
+      padding: 80px 60px;
+      background: #ffffff;
+    }
+
+    .testimonial-slider {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .testimonial {
+      display: none;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 50px 40px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 120px;
+      color: rgba(255,255,255,0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .testimonial-logo {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      background: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 15px;
+    }
+
+    .testimonial-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .testimonial-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .testimonial-text p {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: 15px;
+      font-weight: 600;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .testimonial-author::before {
+      content: '—';
+      font-size: 20px;
+    }
+
+    .offers {
+      padding: 80px 60px;
+    }
+
+    .offer-slider-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 60px;
+    }
+
+    .offer-slider {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .offer-track {
+      display: flex;
+      gap: 24px;
+      will-change: transform;
+    }
+
+    .offer-item {
+      flex: 0 0 300px;
+      background: #fff;
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .offer-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.15);
+    }
+
+    .offer-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .offer-item h4 {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .offer-item p {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: 2px solid var(--primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+    }
+
+    .nav-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .nav-btn.prev {
+      left: 0;
+    }
+
+    .nav-btn.next {
+      right: 0;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      background: #ffffff;
+    }
+
+    /* ===== DEMO POPUP ===== */
+    .demo-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .demo-overlay.hidden {
+      display: none;
+    }
+
+    .demo-popup {
+      background: white;
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 550px;
+      text-align: center;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+      animation: popupSlideIn 0.4s ease;
+    }
+
+    @keyframes popupSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .demo-popup h2 {
+      font-size: 32px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .demo-icon {
+      font-size: 40px;
+    }
+
+    .demo-popup p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .demo-points {
+      text-align: left;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    .demo-points li {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .demo-points li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .demo-popup .btn {
+      margin-top: 0;
+      padding: 16px 40px;
+      font-size: 16px;
+      background: var(--primary);
+      color: white;
+    }
+
+    .demo-popup .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 18px 30px;
+      }
+
+      .hero {
+        padding: 60px 30px;
+      }
+
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      .hero-dots {
+        bottom: 30px;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust {
+        grid-template-columns: 1fr;
+        padding: 0 30px;
+      }
+
+      .categories, .testimonials, .offers {
+        padding: 60px 30px;
+      }
+
+      .testimonial-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .testimonial-text {
+        text-align: center;
+      }
+
+      .offer-slider-container {
+        padding: 0 50px;
+      }
+
+      .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      /* Demo Popup Mobile */
+      .demo-popup {
+        padding: 30px 25px;
+        max-width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .demo-popup h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .demo-icon {
+        font-size: 32px;
+      }
+
+      .demo-popup p {
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .demo-points li {
+        font-size: 13px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+
+      .demo-popup .btn {
+        padding: 14px 32px;
+        font-size: 15px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO POPUP -->
+<div class="demo-overlay" id="demoOverlay">
+  <div class="demo-popup">
+    <h2>
+      <span class="demo-icon"></span>
+      Demo Website
+    </h2>
+    <ul class="demo-points">
+    <p>
+     <li>This is made for Desktop View </li>
+     <li>If you are viewing on mobile, please switch to desktop view for full experience else you might experience issues.</li>
+    </p>
+    </ul>
+    <p>
+      Please read the following before proceeding:
+    </p>
+    
+    <ul class="demo-points">
+      <li>This website is a demonstration/prototype created solely to showcase the design layout, structure, and user flow of the platform.</li>
+      <li>All images, product names, pricing, logos, and written content used on this site are placeholder/demo assets and do not represent real data.</li>
+      <li>The visual design, UI components, and interactions shown here are not final and may change during the actual development phase.</li>
+      <li>Any functional elements (such as sliders, cart actions, or navigation) are implemented only to demonstrate workflow, not production behavior.</li>
+      <li>This demo should not be considered a live, commercial, or operational website.</li>
+      <li>Final content, branding, product details, and integrations will be added only after requirements are finalized and approved.</li>
+    </ul>
+    <button class="btn" onclick="closeDemo()">I Understand</button>
+  </div>
+</div>
+
+<header class="navbar">
+  <a href="home.html"><div class="logo">OPERON</div></a>
+  <nav>
+    <a href="category.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="qoute.html">Account</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <h1>Advanced Diagnostic Solutions</h1>
+    <p>Analyzers, reagents & consumables for modern laboratories</p>
+    <a href="category.html" class="btn">Explore Products</a>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<section class="trust">
+  <div>ISO Certified</div>
+  <div>500+ Installations</div>
+  <div>Pan-India Service</div>
+</section>
+
+<section class="categories">
+  <h2>Product Categories</h2>
+  <div class="category-grid">
+    <button class="category-card" onclick="window.location.href='category.html'">Analyzers</button>
+    <button class="category-card">Reagents</button>
+    <button class="category-card">Consumables</button>
+    <button class="category-card">Accessories</button>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>Trusted by Leading Labs</h2>
+  <div class="testimonial-slider">
+    <div class="testimonial active">
+      <div class="testimonial-content">
+        <div class="testimonial-logo">
+          <img src="https://picsum.photos/seed/lab1/120/120" alt="Lab Logo">
+        </div>
+        <div class="testimonial-text">
+          <p>"Operon analyzers have improved our turnaround time and reliability. Installation and service support were excellent."</p>
+          <div class="testimonial-author">Diagnostic Lab, Bengaluru</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-content">
+        <div class="testimonial-logo">
+          <img src="https://picsum.photos/seed/lab2/120/120" alt="Lab Logo">
+        </div>
+        <div class="testimonial-text">
+          <p>"Consistent results and responsive technical support. Highly recommended for mid-size laboratories."</p>
+          <div class="testimonial-author">Pathology Center, Mumbai</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-content">
+        <div class="testimonial-logo">
+          <img src="https://picsum.photos/seed/lab3/120/120" alt="Lab Logo">
+        </div>
+        <div class="testimonial-text">
+          <p>"Reliable instruments with clear documentation and training support."</p>
+          <div class="testimonial-author">Hospital Lab, Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offers">
+  <h2>Current Offers</h2>
+  <div class="offer-slider-container">
+    <button class="nav-btn prev" id="prevBtn">‹</button>
+    <div class="offer-slider">
+      <div class="offer-track" id="offerTrack">
+        <div class="offer-item">
+          <img src="https://picsum.photos/seed/prod1/300/200" alt="Semi Auto Analyzer">
+          <h4>Semi Auto Analyzer</h4>
+          <p>Limited period pricing</p>
+          <button class="btn small">Add to Cart</button>
+        </div>
+        <div class="offer-item">
+          <img src="https://picsum.photos/seed/prod2/300/200" alt="Fully Auto Analyzer">
+          <h4>Fully Auto Analyzer</h4>
+          <p>Installation included</p>
+          <button class="btn small">Add to Cart</button>
+        </div>
+        <div class="offer-item">
+          <img src="https://picsum.photos/seed/prod3/300/200" alt="POCT Reagents">
+          <h4>POCT Reagents</h4>
+          <p>Bulk order discounts</p>
+          <button class="btn small">Add to Cart</button>
+        </div>
+        <div class="offer-item">
+          <img src="https://picsum.photos/seed/prod4/300/200" alt="Lab Consumables">
+          <h4>Lab Consumables</h4>
+          <p>Special bundle offer</p>
+          <button class="btn small">Add to Cart</button>
+        </div>
+        <div class="offer-item">
+          <img src="https://picsum.photos/seed/prod5/300/200" alt="Diagnostic Kit">
+          <h4>Diagnostic Kit</h4>
+          <p>Complete testing solution</p>
+          <button class="btn small">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <button class="nav-btn next" id="nextBtn">›</button>
+  </div>
+</section>
+
+<footer>
+  Operon Biotech • Advanced Diagnostic Solutions
+</footer>
+
+<script>
+// ========== DEMO POPUP ==========
+function closeDemo() {
+  document.getElementById('demoOverlay').classList.add('hidden');
+}
+
+// ========== HERO SLIDER ==========
+(function() {
+  const hero = document.getElementById("hero");
+  const dotsContainer = document.getElementById("heroDots");
+  const images = [
+    "https://picsum.photos/seed/diagnostic1/1600/900",
+    "https://picsum.photos/seed/diagnostic2/1600/900",
+    "https://picsum.photos/seed/diagnostic3/1600/900"
+  ];
+  let index = 0;
+  let interval;
+
+  function renderDots() {
+    dotsContainer.innerHTML = "";
+    images.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.addEventListener("click", () => {
+        index = i;
+        updateHero();
+        resetInterval();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    [...dotsContainer.children].forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  }
+
+  function updateHero() {
+    hero.style.backgroundImage = `url('${images[index]}')`;
+    updateDots();
+  }
+
+  function nextSlide() {
+    index = (index + 1) % images.length;
+    updateHero();
+  }
+
+  function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 5000);
+  }
+
+  renderDots();
+  updateHero();
+  interval = setInterval(nextSlide, 5000);
+})();
+
+// ========== TESTIMONIAL SLIDER ==========
+(function() {
+  let tIndex = 0;
+  const testimonials = document.querySelectorAll(".testimonial");
+
+  setInterval(() => {
+    testimonials[tIndex].classList.remove("active");
+    tIndex = (tIndex + 1) % testimonials.length;
+    testimonials[tIndex].classList.add("active");
+  }, 5000);
+})();
+
+// ========== OFFER SLIDER (INFINITE LOOP) ==========
+window.addEventListener("load", () => {
+  const track = document.getElementById("offerTrack");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const gap = 24;
+
+  let slides = Array.from(track.children);
+  const slideCount = slides.length;
+
+  // Clone first and last for infinite loop
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slideCount - 1].cloneNode(true);
+
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, slides[0]);
+
+  slides = Array.from(track.children);
+  let index = 1; // Start at first real slide
+  let slideWidth = slides[0].getBoundingClientRect().width + gap;
+  let isTransitioning = false;
+
+  function updatePosition(animate = true) {
+    track.style.transition = animate ? "transform 0.45s ease" : "none";
+    track.style.transform = `translateX(${-index * slideWidth}px)`;
+  }
+
+  function moveSlide(direction) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index += direction;
+    updatePosition(true);
+  }
+
+  // Handle infinite loop transitions
+  track.addEventListener("transitionend", () => {
+    isTransitioning = false;
+    
+    if (slides[index] === firstClone) {
+      index = 1;
+      updatePosition(false);
+    }
+    
+    if (slides[index] === lastClone) {
+      index = slides.length - 2;
+      updatePosition(false);
+    }
+  });
+
+  // Button controls
+  prevBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    moveSlide(-1);
+  });
+  
+  nextBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    moveSlide(1);
+  });
+
+  // Auto-play
+  let autoPlay = setInterval(() => moveSlide(1), 5000);
+
+  // Pause on hover
+  const container = document.querySelector('.offer-slider-container');
+  container.addEventListener("mouseenter", () => {
+    clearInterval(autoPlay);
+  });
+
+  container.addEventListener("mouseleave", () => {
+    autoPlay = setInterval(() => moveSlide(1), 5000);
+  });
+
+  // Handle resize
+  window.addEventListener("resize", () => {
+    slideWidth = slides[0].getBoundingClientRect().width + gap;
+    updatePosition(false);
+  });
+
+  // Initialize
+  updatePosition(false);
+});
+</script>
+
+</body>
+</html>

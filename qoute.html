@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile & Enquiry - Operon</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --accent: #38bdf8;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .navbar a:hover {
+      color: var(--primary);
+    }
+
+    .page-header {
+      padding: 40px 60px;
+      background: var(--card);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .page-header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+    }
+
+    .form-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 60px;
+    }
+
+    .form-section {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.06);
+      margin-bottom: 24px;
+    }
+
+    .form-section h2 {
+      font-size: 20px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .radio-group input[type="radio"] {
+      width: auto;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+    }
+
+    .file-upload {
+      border: 2px dashed #e2e8f0;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .file-upload:hover {
+      border-color: var(--primary);
+    }
+
+    .file-upload input[type="file"] {
+      display: none;
+    }
+
+    .conditional-section {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1e3a8a;
+    }
+
+    .info-note {
+      background: #f0f9ff;
+      border-left: 4px solid var(--accent);
+      padding: 16px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      background: #ffffff;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="index.html"><div class="logo">OPERON</div></a>
+  <nav>
+    <a href="category.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="qoute.html">Account</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <h1>Partner Enquiry Form</h1>
+  <p>Tell us about your organization and requirements</p>
+</div>
+
+<div class="form-container">
+  <form>
+    <div class="form-section">
+      <h2>Basic Information</h2>
+      
+      <div class="form-group">
+        <label>Lab Name / Firm / Company Name *</label>
+        <input type="text" required placeholder="Enter your organization name">
+      </div>
+
+      <div class="form-group">
+        <label>Brief About Firm / Company Profile</label>
+        <textarea placeholder="Describe your organization, years in operation, key focus areas, etc."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Upload Company Profile (Optional)</label>
+        <div class="file-upload" onclick="document.getElementById('fileUpload').click()">
+          <input type="file" id="fileUpload" accept=".pdf,.doc,.docx">
+          <p style="color: var(--muted);">Click to upload or drag and drop</p>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">PDF, DOC, DOCX (Max 10MB)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Organization Type</h2>
+      
+      <div class="info-note">
+        Please select your organization type to help us customize our response
+      </div>
+
+      <div class="form-group">
+        <label>I am a/an: *</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="orgType" value="lab" required>
+            Laboratory
+          </label>
+          <label>
+            <input type="radio" name="orgType" value="business" required>
+            Business Partner (Reseller/Distributor)
+          </label>
+        </div>
+      </div>
+
+      <div class="conditional-section" id="labSection" style="display: none;">
+        <h3 style="font-size: 16px; margin-bottom: 16px;">Laboratory Details</h3>
+        
+        <div class="form-group">
+          <label>Number of Coagulation Samples per Day</label>
+          <input type="number" placeholder="Average daily volume">
+        </div>
+
+        <div class="form-group">
+          <label>Types of Parameters Tested</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox"> PT (Prothrombin Time)</label>
+            <label><input type="checkbox"> APTT (Activated Partial Thromboplastin Time)</label>
+            <label><input type="checkbox"> TT (Thrombin Time)</label>
+            <label><input type="checkbox"> Fibrinogen</label>
+            <label><input type="checkbox"> D-Dimer</label>
+            <label><input type="checkbox"> Other Parameters</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Current Arrangement</label>
+          <div class="radio-group" style="flex-direction: column;">
+            <label>
+              <input type="radio" name="currentArrangement">
+              Manual testing
+            </label>
+            <label>
+              <input type="radio" name="currentArrangement">
+              Not performing coagulation testing
+            </label>
+            <label>
+              <input type="radio" name="currentArrangement">
+              Already using coagulation system
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>If using existing system, please specify brand name</label>
+          <input type="text" placeholder="Brand name (if applicable)">
+        </div>
+      </div>
+
+      <div class="conditional-section" id="businessSection" style="display: none;">
+        <h3 style="font-size: 16px; margin-bottom: 16px;">Business Partner Details</h3>
+        
+        <div class="form-group">
+          <label>Reach (Regions/Locations)</label>
+          <input type="text" placeholder="e.g., Maharashtra, Gujarat, North India">
+        </div>
+
+        <div class="form-group">
+          <label>Team Size</label>
+          <input type="number" placeholder="Number of sales representatives">
+        </div>
+
+        <div class="form-group">
+          <label>Current Coagulation Product / Reagent Portfolio</label>
+          <textarea placeholder="List brands and products you currently distribute"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Tax/GST Details (Indian Partners)</label>
+          <input type="text" placeholder="GST Number">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Contact Details</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Contact Person Name *</label>
+          <input type="text" required placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Designation</label>
+          <input type="text" placeholder="Your role">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" required placeholder="10-digit mobile number">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" required placeholder="email@example.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <textarea placeholder="Complete address with PIN code"></textarea>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Additional Information</h2>
+      
+      <div class="form-group">
+        <label>How did you come to know about us?</label>
+        <select>
+          <option>Select an option</option>
+          <option>Search Engine (Google, etc.)</option>
+          <option>Social Media</option>
+          <option>Referral from colleague</option>
+          <option>Exhibition/Conference</option>
+          <option>Advertisement</option>
+          <option>Existing customer</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Requirements / Comments</label>
+        <textarea placeholder="Please share your specific requirements, questions, or any other information that would help us serve you better"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Enquiry</button>
+    </div>
+  </form>
+</div>
+
+<footer>
+  Operon Biotech • Advanced Diagnostic Solutions
+</footer>
+
+<script>
+  document.querySelectorAll('input[name="orgType"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const labSection = document.getElementById('labSection');
+      const businessSection = document.getElementById('businessSection');
+      
+      if (this.value === 'lab') {
+        labSection.style.display = 'block';
+        businessSection.style.display = 'none';
+      } else {
+        labSection.style.display = 'none';
+        businessSection.style.display = 'block';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
